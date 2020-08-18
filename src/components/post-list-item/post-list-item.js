@@ -13,9 +13,9 @@ const PostListItem = (props) => {
 		>
 			<span className="post-list-item__text">{props.title}</span>
 			<div className="post-list-item__icons">
-				<a href="#" className="post-list-item__delete">
+				<span className="post-list-item__delete">
 					<i className="fa fa-trash-o" aria-hidden="true"></i>
-				</a>
+				</span>
 				<span className="post-list-item__heart">
 					<i className="fa fa-heart" aria-hidden="true"></i>
 				</span>

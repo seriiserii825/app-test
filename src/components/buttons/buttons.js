@@ -3,8 +3,9 @@ import "./buttons.scss";
 
 const Button = (props) => {
 	const activeClass = props.active ? 'active' : '';
+	const buttonType = props.type ? props.type : 'button';
 	return (
-		<button className={`button ${activeClass}`}>{props.name}</button>
+		<button type={buttonType} className={`button ${activeClass}`}>{props.name}</button>
 	);
 };
 

@@ -3,6 +3,7 @@ import "./app.scss";
 import AppHeader from "../app-header/app-header";
 import SearchBar from "../search-bar/search-bar";
 import PostList from "../post-list/post-list";
+import PostForm from "../post-form/post-form";
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -25,7 +26,8 @@ export default class App extends React.Component {
 			<div className="container">
 				<AppHeader/>
 				<SearchBar/>
-				<PostList posts={this.state.posts} />
+				<PostList posts={this.state.posts}/>
+				<PostForm/>
 			</div>
 		)
 	}
