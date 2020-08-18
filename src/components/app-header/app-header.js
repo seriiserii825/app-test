@@ -1,11 +1,12 @@
 import React from "react";
 import "./app-header.scss";
 
-const AppHeader = () => {
+const AppHeader = (props) => {
+
 	return (
 		<div className="app-header">
 			<h2>Student</h2>
-			<p>10 записей, из них понравилось 8</p>
+			<p>{props.allPosts} записей, из них понравилось 8</p>
 		</div>
 	)
 };

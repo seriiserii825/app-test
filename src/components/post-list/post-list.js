@@ -5,7 +5,13 @@ import PostListItem from "../post-list-item/post-list-item";
 const PostList = (props) => {
 	const posts = props.posts.map((item) => {
 		return (
-			<PostListItem title={item.title} liked={item.liked} key={item.id}/>
+			<PostListItem
+				title={item.title}
+				liked={item.liked}
+				key={item.id}
+				id={item.id}
+				onToggleLikes={props.onToggleLikes}
+			/>
 		);
 	});
 	return (

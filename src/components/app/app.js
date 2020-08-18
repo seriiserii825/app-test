@@ -18,15 +18,36 @@ export default class App extends React.Component {
 				{title: "Sports news", liked: true, id: 6},
 			]
 		};
+		this.onToggleLikes = (id) => {
+			const index = this.state.posts.findIndex((item) => {
+				return item.id === id;
+			});
+			const before = this.state.posts.slice(0, index);
+			const old = this.state.posts[index];
+			const oldLikeValue = old.liked;
+			old.liked = !oldLikeValue;
+			const after = this.state.posts.slice(index+1);
+			const newArr = [...before, old, ...after];
+
+			this.setState((posts) => {
+				return {
+					posts: newArr
+				};
+			});
+		}
 	}
 
 
 	render() {
+		const allPosts = this.state.posts.length;
 		return (
 			<div className="container">
-				<AppHeader/>
+				<AppHeader allPosts={allPosts} />
 				<SearchBar/>
-				<PostList posts={this.state.posts}/>
+				<PostList
+					posts={this.state.posts}
+					onToggleLikes={this.onToggleLikes}
+				/>
 				<PostForm/>
 			</div>
 		)

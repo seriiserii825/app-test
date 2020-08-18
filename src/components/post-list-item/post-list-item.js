@@ -8,6 +8,7 @@ const PostListItem = (props) => {
 	}
 	return (
 		<li
+			onClick={() => props.onToggleLikes(props.id)}
 			className={`post-list-item ${postClass}`}
 			key={props.id}
 		>
