@@ -8,11 +8,10 @@ const PostListItem = (props) => {
 	}
 	return (
 		<li
-			onClick={() => props.onToggleLikes(props.id)}
 			className={`post-list-item ${postClass}`}
 			key={props.id}
 		>
-			<span className="post-list-item__text">{props.title}</span>
+			<span onClick={() => props.onToggleLikes(props.id)} className="post-list-item__text">{props.title}</span>
 			<div className="post-list-item__icons">
 				<span className="post-list-item__delete">
 					<i className="fa fa-trash-o" aria-hidden="true"></i>

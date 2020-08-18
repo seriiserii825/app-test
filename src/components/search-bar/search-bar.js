@@ -3,14 +3,14 @@ import Filter from "../filter/filter";
 import "./search-bar.scss";
 import Input from "../input/input";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
 	return (
 		<div className="search-bar">
 			<div className="search-bar__item">
 				<Input/>
 			</div>
 			<div className="search-bar__item">
-				<Filter/>
+				<Filter onFilter={props.onFilter} />
 			</div>
 		</div>
 	);

@@ -16,7 +16,8 @@ export default class App extends React.Component {
 				{title: "Have a nice holidays", liked: false, id: 4},
 				{title: "Weather for the next week", liked: true, id: 5},
 				{title: "Sports news", liked: true, id: 6},
-			]
+			],
+			filter: 'all'
 		};
 		this.onToggleLikes = (id) => {
 			const index = this.state.posts.findIndex((item) => {
@@ -26,7 +27,7 @@ export default class App extends React.Component {
 			const old = this.state.posts[index];
 			const oldLikeValue = old.liked;
 			old.liked = !oldLikeValue;
-			const after = this.state.posts.slice(index+1);
+			const after = this.state.posts.slice(index + 1);
 			const newArr = [...before, old, ...after];
 
 			this.setState((posts) => {
@@ -35,17 +36,30 @@ export default class App extends React.Component {
 				};
 			});
 		}
+		this.onFilter = (value) => {
+			let posts = [];
+			if (value !== 'liked') {
+				posts = this.state.posts;
+			} else {
+				posts = this.state.posts.filter((item) => {
+					return item.liked;
+				});
+			}
+			return posts;
+		};
 	}
 
 
 	render() {
 		const allPosts = this.state.posts.length;
+		const visiblePosts = this.onFilter('liked');
+
 		return (
 			<div className="container">
-				<AppHeader allPosts={allPosts} />
-				<SearchBar/>
+				<AppHeader allPosts={allPosts}/>
+				<SearchBar onFilter={this.onFilter}/>
 				<PostList
-					posts={this.state.posts}
+					posts={visiblePosts}
 					onToggleLikes={this.onToggleLikes}
 				/>
 				<PostForm/>

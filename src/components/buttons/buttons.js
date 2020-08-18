@@ -5,7 +5,11 @@ const Button = (props) => {
 	const activeClass = props.active ? 'active' : '';
 	const buttonType = props.type ? props.type : 'button';
 	return (
-		<button type={buttonType} className={`button ${activeClass}`}>{props.name}</button>
+		<button
+			onClick={() => props.onFilter(props.liked)}
+			type={buttonType}
+			className={`button ${activeClass}`}
+		>{props.name}</button>
 	);
 };
 
