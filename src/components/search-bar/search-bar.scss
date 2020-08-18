@@ -1,0 +1,12 @@
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  &__item {
+    &:first-child {
+      width: 70%;
+    }
+    &:last-child {
+      width: 30%;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.button {
+  margin-left: 2px;
+  padding: 10px;
+  height: 40px;
+  color: white;
+  background-color: dodgerblue;
+  border: none;
+  transition: all .4s;
+  cursor: pointer;
+  &.active,
+  &:hover {
+    background-color: darken(dodgerblue, 10%);
+  }
+}
