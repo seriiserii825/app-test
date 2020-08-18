@@ -1,9 +1,21 @@
 import React from 'react';
+import AppHeader from "../app-header/app-header";
+import SearchPanel from "../search-panel/search-panel";
+import PostStatusFilter from "../post-status-filter/post-status-filter";
+import PostList from "../post-list/post-list";
+import PostAddForm from "../post-add-form/post-add-form";
+import "./app.scss";
 
 const App = () => {
 	return (
-		<div class="app">
-			<h1>App</h1>
+		<div className="app">
+			<AppHeader/>
+			<div className="search-panel d-flex">
+				<SearchPanel/>
+				<PostStatusFilter/>
+			</div>
+			<PostList/>
+			<PostAddForm/>
 		</div>
 	);
 };
