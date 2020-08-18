@@ -1,23 +1,53 @@
 import React from 'react';
 import "./post-list-item.scss";
 
-const PostListItem = () => {
-	return (
-		<li className="app-list-item d-flex justify-content-space-between">
-			<span className="app-list-item-label">
-				hello world
-			</span>
-			<div className="d-flex justify-content-center align-items-center">
-				<button className="btn-star btn-sm">
-					<i className="fa fa-star"></i>
-				</button>
-				<button className="btn-trash btn-sm">
-					<i className="fa fa-trash-o"></i>
-				</button>
-				<i className="fa fa-heart"></i>
-			</div>
-		</li>
-	);
-};
+export default class PostListItem extends React.Component{
+	constructor(props) {
+		super(props);
+		this.state = {
+			important: false,
+			like: false
+		};
 
-export default PostListItem;
+		this.onToggleImportant = () => {
+			this.setState({
+				important: !this.state.important
+			});
+		}
+
+		this.onToggleLike = () => {
+			this.setState({
+				like: !this.state.like
+			});
+		}
+	}
+
+	render() {
+		let classLists = 'app-list-item d-flex justify-content-space-between';
+
+		if (this.state.important) {
+			classLists += ' important';
+		}
+
+		if (this.state.like) {
+			classLists += ' like';
+		}
+
+		return (
+			<li className={classLists}>
+			<span onClick={this.onToggleImportant} className="app-list-item-label">
+				{this.props.label}
+			</span>
+				<div className="d-flex justify-content-center align-items-center">
+					<button onClick={this.onToggleLike} className="btn-star btn-sm">
+						<i className="fa fa-star"></i>
+					</button>
+					<button className="btn-trash btn-sm">
+						<i className="fa fa-trash-o"></i>
+					</button>
+					<i className="fa fa-heart"></i>
+				</div>
+			</li>
+		);
+	}
+};
