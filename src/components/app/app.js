@@ -16,7 +16,8 @@ export default class App extends React.Component {
 				{title: "Have a nice holidays", liked: false, id: 4},
 				{title: "Weather for the next week", liked: true, id: 5},
 				{title: "Sports news", liked: true, id: 6},
-			]
+			],
+			searchText: ''
 		};
 		this.onDelete = (id) => {
 			const index = this.state.posts.findIndex((elem) => elem.id === id);
@@ -54,21 +55,39 @@ export default class App extends React.Component {
 				posts: newArr
 			}));
 		}
+		this.onSearch = (searchText) => {
+			this.setState({
+				searchText: searchText
+			});
+		}
+		this.onUpdatePosts = (items, searchStr) => {
+			if(searchStr.length < 2){
+				return items;
+			}else{
+				const searchArr = items.filter((item) => {
+					return item.title.indexOf(searchStr) > -1;
+				});
+				return searchArr;
+			}
+		}
 	}
 
 	render() {
 		const allPosts = this.state.posts.length;
 		const likedPosts = this.state.posts.filter((elem) => elem.liked).length;
+		const visiblePosts = this.onUpdatePosts(this.state.posts, this.state.searchText);
 		return (
 			<div className="container">
 				<AppHeader
 					allPosts={allPosts}
 					likedPosts={likedPosts}
 				/>
-				<SearchBar/>
+				<SearchBar
+					onSearch={this.onSearch}
+				/>
 				<PostList
 					onDelete={this.onDelete}
-					posts={this.state.posts}
+					posts={visiblePosts}
 					onToggleLike={this.onToggleLike}
 				/>
 				<PostForm
