@@ -18,15 +18,22 @@ export default class App extends React.Component {
 				{title: "Sports news", liked: true, id: 6},
 			]
 		};
+		this.onDelete = (id) => {
+			const index = this.state.posts.findIndex((elem) => elem.id === id);
+			const posts = this.state.posts;
+			const newArr = [...posts.slice(0, index), ...posts.slice(index + 1)];
+			this.setState(({posts}) => {
+				return {posts: newArr};
+			});
+		}
 	}
-
 
 	render() {
 		return (
 			<div className="container">
 				<AppHeader/>
 				<SearchBar/>
-				<PostList posts={this.state.posts}/>
+				<PostList onDelete={this.onDelete} posts={this.state.posts}/>
 				<PostForm/>
 			</div>
 		)

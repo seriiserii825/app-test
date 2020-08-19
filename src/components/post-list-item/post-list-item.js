@@ -13,7 +13,7 @@ const PostListItem = (props) => {
 		>
 			<span className="post-list-item__text">{props.title}</span>
 			<div className="post-list-item__icons">
-				<span className="post-list-item__delete">
+				<span onClick={props.onDelete} className="post-list-item__delete">
 					<i className="fa fa-trash-o" aria-hidden="true"></i>
 				</span>
 				<span className="post-list-item__heart">

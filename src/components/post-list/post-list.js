@@ -5,7 +5,12 @@ import PostListItem from "../post-list-item/post-list-item";
 const PostList = (props) => {
 	const posts = props.posts.map((item) => {
 		return (
-			<PostListItem title={item.title} liked={item.liked} key={item.id}/>
+			<PostListItem
+				onDelete={() => props.onDelete(item.id)}
+				title={item.title}
+				liked={item.liked}
+				key={item.id}
+			/>
 		);
 	});
 	return (
