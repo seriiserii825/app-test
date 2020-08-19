@@ -1,11 +1,11 @@
 import React from 'react';
 import "./post-status-filter.scss";
 
-const PostStatusFilter = () => {
+const PostStatusFilter = (props) => {
 	return (
 		<div className="btn-group">
-			<button className="btn btn-info">Все</button>
-			<button className="btn btn-success">Понравилось</button>
+			<button onClick={() => props.onFilterSelect('all')} className="btn btn-info">Все</button>
+			<button onClick={() => props.onFilterSelect('like')} className="btn btn-success">Понравилось</button>
 		</div>
 	);
 };
