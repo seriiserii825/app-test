@@ -15,7 +15,8 @@ export default class App extends React.Component {
 				{label: "Second post", important: false, like: true, id: 2},
 				{label: "Third post", important: true, like: false, id: 3},
 				{label: "Fourth post", important: false, like: false, id: 4},
-			]
+			],
+			term: ''
 		}
 		this.onDelete = (id) => {
 			const index = this.state.posts.findIndex((elem) => elem.id === id);
@@ -47,7 +48,6 @@ export default class App extends React.Component {
 				}
 			});
 		}
-
 		this.onToggleProperty = (id, property) => {
 			const {posts} = this.state;
 			const index = posts.findIndex((elem) => elem.id === id);
@@ -61,28 +61,46 @@ export default class App extends React.Component {
 				}
 			});
 		}
-
 		this.onToggleImportant = (id) => {
 			this.onToggleProperty(id, 'important');
 		}
-
 		this.onToggleLike = (id) => {
 			this.onToggleProperty(id, 'like');
+		}
+		this.searchPosts = (items, term) => {
+			if(term.length === 0){
+				return items;
+			}
+
+			return items.filter((item) => {
+				return item.label.indexOf(term) > -1;
+			});
+		}
+		this.onUpdatePosts = (term) => {
+			this.setState({
+				term: term
+			});
 		}
 	}
 
 	render() {
 		const likes = this.state.posts.filter((item) => item.like).length;
 		const allPosts = this.state.posts.length;
+		const visiblePosts = this.searchPosts(this.state.posts, this.state.term);
+
 		return (
 			<div className="app">
 				<AppHeader like={likes} allPosts={allPosts} />
 				<div className="search-panel d-flex">
-					<SearchPanel/>
+					<SearchPanel onUpdatePosts={this.onUpdatePosts} />
 					<PostStatusFilter/>
 				</div>
-				<PostList onToggleLike={this.onToggleLike} onToggleImportant={this.onToggleImportant}
-						  posts={this.state.posts} onDelete={this.onDelete}/>
+				<PostList
+					onToggleLike={this.onToggleLike}
+					onToggleImportant={this.onToggleImportant}
+					posts={visiblePosts}
+					onDelete={this.onDelete}
+				/>
 				<PostAddForm onAddPost={this.onAddPost}/>
 			</div>
 		);
