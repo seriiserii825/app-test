@@ -40,6 +40,19 @@ export default class App extends React.Component {
 				}
 			});
 		}
+		this.onToggleImportant = (id) => {
+			const {posts} = this.state;
+			const index = posts.findIndex((elem) => elem.id === id);
+			const oldElem = posts[index];
+			const newElem = {...oldElem, important: !oldElem.important};
+			const newArr = [...posts.slice(0, index), newElem , ...posts.slice(index+1)];
+
+			this.setState(({posts}) => {
+				return {
+					posts: newArr
+				}
+			});
+		}
 	}
 
 	render() {
@@ -50,7 +63,7 @@ export default class App extends React.Component {
 					<SearchPanel/>
 					<PostStatusFilter/>
 				</div>
-				<PostList posts={this.state.posts} onDelete={this.onDelete}/>
+				<PostList onToggleImportant={this.onToggleImportant} posts={this.state.posts} onDelete={this.onDelete}/>
 				<PostAddForm onAddPost={this.onAddPost}/>
 			</div>
 		);

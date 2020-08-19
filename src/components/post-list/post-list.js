@@ -5,7 +5,14 @@ import PostListItem from "../post-list-item/post-list-item";
 const PostList = (props) => {
 	const elements = props.posts.map((item) => {
 		return (
-			<PostListItem onDelete={() => props.onDelete(item.id)} label={item.label} important={item.important} key={item.id} like={item.like} />
+			<PostListItem
+				onDelete={() => props.onDelete(item.id)}
+				label={item.label}
+				important={item.important}
+				key={item.id}
+				like={item.like}
+				onToggleImportant={() => props.onToggleImportant(item.id)}
+			/>
 		)
 	});
 	return (
