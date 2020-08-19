@@ -1,9 +1,14 @@
 import React from 'react';
 import "./post-add-form.scss";
 
-const PostAddForm = () => {
+const PostAddForm = (props) => {
 	return (
-		<form className="bottom-panel d-flex">
+		<form
+			onSubmit={(e) => {
+				e.preventDefault();
+				props.onAddPost('body')
+			}}
+			className="bottom-panel d-flex">
 			<input
 				type="text"
 				placeholder="О чем вы думаете сейчас?"
