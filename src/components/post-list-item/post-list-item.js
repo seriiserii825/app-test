@@ -42,7 +42,7 @@ export default class PostListItem extends React.Component{
 					<button onClick={this.onToggleLike} className="btn-star btn-sm">
 						<i className="fa fa-star"></i>
 					</button>
-					<button className="btn-trash btn-sm">
+					<button onClick={this.props.onDelete} className="btn-trash btn-sm">
 						<i className="fa fa-trash-o"></i>
 					</button>
 					<i className="fa fa-heart"></i>
