@@ -57,9 +57,14 @@ export default class App extends React.Component {
 	}
 
 	render() {
+		const allPosts = this.state.posts.length;
+		const likedPosts = this.state.posts.filter((elem) => elem.liked).length;
 		return (
 			<div className="container">
-				<AppHeader/>
+				<AppHeader
+					allPosts={allPosts}
+					likedPosts={likedPosts}
+				/>
 				<SearchBar/>
 				<PostList
 					onDelete={this.onDelete}
