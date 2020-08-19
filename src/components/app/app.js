@@ -17,7 +17,8 @@ export default class App extends React.Component {
 				{title: "Weather for the next week", liked: true, id: 5},
 				{title: "Sports news", liked: true, id: 6},
 			],
-			searchText: ''
+			searchText: '',
+			filter: 'all'
 		};
 		this.onDelete = (id) => {
 			const index = this.state.posts.findIndex((elem) => elem.id === id);
@@ -70,12 +71,24 @@ export default class App extends React.Component {
 				return searchArr;
 			}
 		}
+		this.onFilter = (filter) => {
+			this.setState({
+				filter: filter
+			});
+		}
+		this.onFilteredPosts = (items, filter) => {
+			if(filter === 'all'){
+				return items;
+			}else{
+				return items.filter((item) => item.liked);
+			}
+		};
 	}
 
 	render() {
 		const allPosts = this.state.posts.length;
 		const likedPosts = this.state.posts.filter((elem) => elem.liked).length;
-		const visiblePosts = this.onUpdatePosts(this.state.posts, this.state.searchText);
+		const visiblePosts = this.onFilteredPosts(this.onUpdatePosts(this.state.posts, this.state.searchText), this.state.filter);
 		return (
 			<div className="container">
 				<AppHeader
@@ -84,6 +97,7 @@ export default class App extends React.Component {
 				/>
 				<SearchBar
 					onSearch={this.onSearch}
+					onFilter={this.onFilter}
 				/>
 				<PostList
 					onDelete={this.onDelete}

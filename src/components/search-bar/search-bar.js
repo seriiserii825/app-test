@@ -3,7 +3,7 @@ import Filter from "../filter/filter";
 import "./search-bar.scss";
 import "../input/input.scss";
 
-export default class SearchBar extends React.Component{
+export default class SearchBar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -29,7 +29,9 @@ export default class SearchBar extends React.Component{
 					/>
 				</div>
 				<div className="search-bar__item">
-					<Filter/>
+					<Filter
+						onFilter={this.props.onFilter}
+					/>
 				</div>
 			</div>
 		);
