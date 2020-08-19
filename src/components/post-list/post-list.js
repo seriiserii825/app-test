@@ -12,6 +12,7 @@ const PostList = (props) => {
 				key={item.id}
 				like={item.like}
 				onToggleImportant={() => props.onToggleImportant(item.id)}
+				onToggleLike={() => props.onToggleLike(item.id)}
 			/>
 		)
 	});
