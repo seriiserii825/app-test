@@ -10,6 +10,7 @@ const PostList = (props) => {
 				title={item.title}
 				liked={item.liked}
 				key={item.id}
+				onToggleLike={() => props.onToggleLike(item.id)}
 			/>
 		);
 	});

@@ -26,6 +26,15 @@ export default class App extends React.Component {
 				return {posts: newArr};
 			});
 		}
+		this.onToggleLike = (id) => {
+			const index = this.state.posts.findIndex((item) => item.id === id);
+			let oldElem = this.state.posts[index];
+			oldElem = {...oldElem, liked: !oldElem.liked};
+			const newArr = [...this.state.posts.slice(0, index), oldElem, ...this.state.posts.slice(index + 1)];
+			this.setState(({posts}) => ({
+				posts: newArr
+			}));
+		}
 	}
 
 	render() {
@@ -33,7 +42,11 @@ export default class App extends React.Component {
 			<div className="container">
 				<AppHeader/>
 				<SearchBar/>
-				<PostList onDelete={this.onDelete} posts={this.state.posts}/>
+				<PostList
+					onDelete={this.onDelete}
+					posts={this.state.posts}
+					onToggleLike={this.onToggleLike}
+				/>
 				<PostForm/>
 			</div>
 		)
