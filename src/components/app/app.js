@@ -35,6 +35,25 @@ export default class App extends React.Component {
 				posts: newArr
 			}));
 		}
+		this.createId = (items) => {
+			let maxId = 0;
+			items.forEach((item) => {
+				if(item.id > 0){
+					maxId = item.id;
+				}
+			});
+			return maxId;
+		}
+		this.onAddPost = (body) => {
+			let maxId = this.createId(this.state.posts);
+			maxId = ++maxId;
+			const newPost = {title: body, liked: false, id: maxId};
+			const newArr = [...this.state.posts, newPost];
+
+			this.setState(({posts}) => ({
+				posts: newArr
+			}));
+		}
 	}
 
 	render() {
@@ -47,7 +66,9 @@ export default class App extends React.Component {
 					posts={this.state.posts}
 					onToggleLike={this.onToggleLike}
 				/>
-				<PostForm/>
+				<PostForm
+					onAddPost={this.onAddPost}
+				/>
 			</div>
 		)
 	}
