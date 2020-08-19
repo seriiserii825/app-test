@@ -65,9 +65,11 @@ export default class App extends React.Component {
 	}
 
 	render() {
+		const likes = this.state.posts.filter((item) => item.like).length;
+		const allPosts = this.state.posts.length;
 		return (
 			<div className="app">
-				<AppHeader/>
+				<AppHeader like={likes} allPosts={allPosts} />
 				<div className="search-panel d-flex">
 					<SearchPanel/>
 					<PostStatusFilter/>
