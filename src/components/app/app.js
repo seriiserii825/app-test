@@ -15,8 +15,7 @@ export default class App extends React.Component {
 				{label: "Second post", important: false, like: true, id: 2},
 				{label: "Third post", important: true, like: false, id: 3},
 				{label: "Fourth post", important: false, like: false, id: 4},
-			],
-			maxId: 4
+			]
 		}
 		this.onDelete = (id) => {
 			const index = this.state.posts.findIndex((elem) => elem.id === id);
@@ -31,7 +30,15 @@ export default class App extends React.Component {
 			});
 		}
 		this.onAddPost = (body) => {
-			const newPost = {label: body, important: false, like: false, id: this.state.maxId++};
+			let maxId = 0;
+			this.state.posts.forEach((item) => {
+				if(item.id > maxId){
+					maxId = item.id
+				}
+			});
+			maxId++;
+
+			const newPost = {label: body, important: false, like: false, id: maxId};
 
 			this.setState((state) => {
 				const newArr = [...state.posts, newPost];
